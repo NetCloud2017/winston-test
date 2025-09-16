@@ -3,7 +3,10 @@ import "winston-daily-rotate-file"
 
 const logger = winston.createLogger({
   level: 'debug',
-  format: winston.format.simple(),
+  format: winston.format.combine(
+    winston.format.colorize(),
+    winston.format.simple()
+  ),
   transports: [
     new winston.transports.Console(),
     // 传输文件

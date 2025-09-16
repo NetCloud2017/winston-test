@@ -9,7 +9,16 @@ const file = new winston.transports.File({
 
 const logger = winston.createLogger({
   level: 'debug',
-  format: winston.format.simple()
+  // format: winston.format.simple()
+  // format: winston.format.json()
+  // format: winston.format.prettyPrint()
+
+  format: winston.format.combine(
+    winston.format.label({label: 'debug'}),
+    // 先添加时间戳，再序列化， 否则json里没有时间。
+    winston.format.timestamp(),
+    winston.format.json(),
+  )
 })
 
 logger.clear()
